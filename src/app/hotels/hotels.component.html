@@ -1,4 +1,9 @@
-<app-filter-header (filterEvent)="filterChange($event)"></app-filter-header>
+<app-filter-header
+ (filterEvent)="filterChange($event)" 
+ [hotelMinValue]="hotelMinValue"
+ [hotelMaxValue]="hotelMaxValue" *ngIf="isParentLoaded">
+</app-filter-header>
+
 <div class="container-fluid list-body">
   <ul class="row " *ngFor="let hotel of filteredHotels;">
 
@@ -10,8 +15,11 @@
         <span class="hotel-name"> {{hotel.name}}</span>
       </div>
       <div class="col-sm-12">
-        <ngb-rating [rate]="hotel.stars"></ngb-rating>
+        <ngb-rating [rate]="hotel.stars" class="star"></ngb-rating>
       </div>
+      <div class="col-sm-12">
+          <span >Rating: {{hotel.rating}}</span>
+        </div>
       <div class="col-sm-12">
           <span class="hotel-price">{{hotel.price| currency:'USD'}}</span>
       </div>

@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import { FilterHeader } from './filter-header.model';
-import { filter } from 'rxjs/operators';
+import { Options,ChangeContext } from 'ng5-slider';
 
 @Component({
   selector: 'app-filter-header',
@@ -11,12 +11,18 @@ import { filter } from 'rxjs/operators';
 export class FilterHeaderComponent implements OnInit {
 
   @Output() filterEvent: EventEmitter<FilterHeader> = new EventEmitter();
-  private filterHeader: FilterHeader = new FilterHeader();
+  @Input() hotelMinValue:number;
+  @Input() hotelMaxValue:number;
 
-  constructor() { }
+  private options: Options;
+  private isHotelPriceRendered: boolean = false;
+
+  private filterHeader: FilterHeader = new FilterHeader();
+ 
+  constructor(option:Options) { }
 
   ngOnInit() {
-
+      this.renderPriceSlider();
   }
 
   nameSearch(nameFilter: string) {
@@ -36,4 +42,28 @@ export class FilterHeaderComponent implements OnInit {
     }
     this.filterEvent.emit(this.filterHeader);
   }
+
+
+  userChangePrice(changeContext: ChangeContext): void {
+    this.filterHeader.minPrice = changeContext.value;
+    this.filterHeader.maxPrice = changeContext.highValue;
+    this.filterEvent.emit(this.filterHeader);
+  
+  }
+
+  private renderPriceSlider(){
+    this.filterHeader.minPrice = this.hotelMinValue;
+    this.filterHeader.maxPrice = this.hotelMaxValue;
+
+    this.options = {
+      floor: this.hotelMinValue,
+      ceil: this.hotelMaxValue,
+      translate: (value: number): string => {
+            return '$' + value;
+      }
+    };
+  }
+
+
+
 }
