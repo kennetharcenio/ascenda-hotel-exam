@@ -1,6 +1,6 @@
+<app-filter-header (filterEvent)="filterChange($event)"></app-filter-header>
 <div class="container-fluid">
-
-  <ul class="row " *ngFor="let hotel of hotels;">
+  <ul class="row " *ngFor="let hotel of filteredHotels;">
 
     <div class="col-sm-2">
       <img [src]="hotel.photo" class="img-thumbnail image-style">

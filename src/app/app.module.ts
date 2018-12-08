@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { HotelsComponent } from './hotels/hotels.component';
 import { HotelService } from './hotels/hotel.service';
 import {NgbModule,NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import { FilterHeaderComponent } from './shared/filter-header/filter-header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HotelsComponent
+    HotelsComponent,
+    FilterHeaderComponent
   ],
   imports: [
     BrowserModule,
