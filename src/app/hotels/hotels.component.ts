@@ -21,8 +21,9 @@ export class HotelsComponent implements OnInit {
 
   constructor(private hotelService: HotelService,
     ratingConfig: NgbRatingConfig) {
-    ratingConfig.max = 10;
+    ratingConfig.max = 5;
     ratingConfig.readonly = true;
+    
 
   }
 
@@ -35,13 +36,19 @@ export class HotelsComponent implements OnInit {
   }
   
   filterChange(filterHeader: FilterHeader) {
+    this.filteredHotels = this.hotels;
     if (filterHeader.name != null) {
       this.filterByName(filterHeader.name);
     }
+    if(filterHeader.starRating.length > 0){
+      this.filteredHotels = this.filteredHotels.filter(hotel=>
+       filterHeader.starRating.includes( hotel.stars)
+        );
+    }   
   }
 
   private filterByName(hotelName: string){
-    this.filteredHotels = this.hotels.filter(hotel => 
+    this.filteredHotels = this.filteredHotels.filter(hotel => 
       hotel.name.toLowerCase().includes(hotelName.toLowerCase())
     );
   }

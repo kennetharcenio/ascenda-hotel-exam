@@ -1,10 +1,20 @@
-<div class="navigation-panel">
-  <nav class="navbar">
-        <div class="navbar-header">
-      <div class="form-group ">
+<div class="container-fluid filterbar">
+
+    
+  <div class="row">
+      <div class="filter-group col-sm-2">
           <label>Name</label>
         <input type="text" (input)="nameSearch($event.target.value)">
       </div>
+      <div class="filter-group col-sm-2">
+          <label>Star rating</label>
+           <div *ngFor="let starNumber of [5,4,3,2,1]">
+            <label>
+            <input id="checkbox1" class="icon-checkbox" type="checkbox" (change)="starClick(starNumber)"/>
+            <span class="fa fa-star" *ngFor="let starCount of [].constructor(starNumber)"></span>
+          </label>
+           </div>
+      </div>
     </div>
-  </nav>
+
 </div>
