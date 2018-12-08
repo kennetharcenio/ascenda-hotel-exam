@@ -8,6 +8,7 @@ import { HotelsComponent } from './hotels/hotels.component';
 import { HotelService } from './hotels/hotel.service';
 import {NgbModule,NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 import { FilterHeaderComponent } from './shared/filter-header/filter-header.component';
+import { Ng5SliderModule,Options } from 'ng5-slider';
 
 
 @NgModule({
@@ -19,9 +20,10 @@ import { FilterHeaderComponent } from './shared/filter-header/filter-header.comp
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    Ng5SliderModule,
+    NgbModule,
   ],
-  providers: [HotelService,NgbRatingConfig],
+  providers: [HotelService,NgbRatingConfig, Options],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

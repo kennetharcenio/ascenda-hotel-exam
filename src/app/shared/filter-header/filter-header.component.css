@@ -16,3 +16,8 @@
     padding-top: 14px;
     margin: 5px;
 }
+
+.fa-star, .sr-only{
+  color: gold;
+}
+
