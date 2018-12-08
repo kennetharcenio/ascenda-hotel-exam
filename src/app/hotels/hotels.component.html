@@ -1,5 +1,5 @@
 <app-filter-header (filterEvent)="filterChange($event)"></app-filter-header>
-<div class="container-fluid">
+<div class="container-fluid list-body">
   <ul class="row " *ngFor="let hotel of filteredHotels;">
 
     <div class="col-sm-2">
@@ -10,13 +10,14 @@
         <span class="hotel-name"> {{hotel.name}}</span>
       </div>
       <div class="col-sm-12">
-        <ngb-rating [rate]="hotel.rating"></ngb-rating>
+        <ngb-rating [rate]="hotel.stars"></ngb-rating>
       </div>
       <div class="col-sm-12">
           <span class="hotel-price">{{hotel.price| currency:'USD'}}</span>
       </div>
       <div class="col-sm-12">
           <span class="hotel-address">{{hotel.address}}</span>
+    
       </div>
 
     </div>
