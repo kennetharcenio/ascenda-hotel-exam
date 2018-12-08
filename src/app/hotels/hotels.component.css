@@ -1,0 +1,19 @@
+ul {
+    list-style-type: none;
+}
+
+.image-style{
+    height: 143px;
+    width: 272px;
+}
+
+
+
+.hotel-name{
+    font-weight: bold;
+}
+.hotel-address{
+    font-size: 12px;
+    color: #0283df;
+    font-weight: 700;
+}
