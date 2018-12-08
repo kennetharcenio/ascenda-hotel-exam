@@ -33,6 +33,14 @@
               (userChangeEnd)="userChangeRating($event)">
             </ng5-slider>
       </div>
+      <div class="filter-group col-sm-2">
+          <label>Sort</label><br/>
+           <select name="sorting" (change)="sortingSelect($event.target.value)">
+              <option *ngFor="let sorting of sortItems;let i=index" [value]="sorting.value">
+                  {{ sorting.description }}
+              </option>
+           </select>
+      </div>
     </div>
 
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import { FilterHeader } from './filter-header.model';
 import { Options, ChangeContext } from 'ng5-slider';
+import { DropdownItem } from '../dropdown.model';
 
 @Component({
   selector: 'app-filter-header',
@@ -19,12 +20,15 @@ export class FilterHeaderComponent implements OnInit {
   private priceOptions: Options;
   private ratingOptions: Options;
   private filterHeader: FilterHeader = new FilterHeader();
+  private sortItems: Array<DropdownItem>=[];
 
   constructor() { }
 
   ngOnInit() {
     this.renderPriceSlider();
     this.renderRatingSlider();
+    this.populateSorting();
+    debugger;
   }
 
   nameSearch(nameFilter: string) {
@@ -52,10 +56,21 @@ export class FilterHeaderComponent implements OnInit {
     this.filterEvent.emit(this.filterHeader);
 
   }
-  userChangeRating(changeContext: ChangeContext){
+  userChangeRating(changeContext: ChangeContext) {
     this.filterHeader.minReviewRating = changeContext.value;
     this.filterHeader.maxReviewRating = changeContext.highValue;
     this.filterEvent.emit(this.filterHeader);
+  }
+  
+  private populateSorting(){
+ 
+    this.sortItems = [
+      new DropdownItem("priceLtoH","Price low to high"),
+      new DropdownItem("priceHtoL","Price high to low"),
+      new DropdownItem("reviewLtoH","Review low to high"), 
+      new DropdownItem("reviewHtoL","Review high to low"),
+      new DropdownItem("starLtoH","Star low to high"), 
+      new DropdownItem("starHtoL","Star high to low")]
   }
 
   private renderPriceSlider() {
@@ -76,10 +91,16 @@ export class FilterHeaderComponent implements OnInit {
     this.filterHeader.minReviewRating = this.minReviewRating;
     this.filterHeader.maxReviewRating = this.maxReviewRating;
     this.ratingOptions = {
-      floor:this.minReviewRating,
+      floor: this.minReviewRating,
       ceil: this.maxReviewRating,
       step: 0.1
     };
+  }
+
+
+  private sortingSelect(sortingValue: string) {
+    this.filterHeader.sort = sortingValue;
+    this.filterEvent.emit(this.filterHeader);
   }
 
 
