@@ -33,6 +33,8 @@ export class HotelsComponent implements OnInit {
       this.filteredHotels = serviceHotels;
       this.setHotelMinAndMaxValue();
       this.setHotelMinAndMaxRating();
+      var defaultSorting ="priceLtoH";
+      this.sortHotels(defaultSorting);
       this.isParentLoaded = true;
     });
   }
@@ -48,6 +50,8 @@ export class HotelsComponent implements OnInit {
 
     this.filterByPrice(filterHeader.minPrice, filterHeader.maxPrice);  
     this.filterByRating(filterHeader.minReviewRating,filterHeader.maxReviewRating); 
+    this.sortHotels(filterHeader.sort);
+  
   }
 
   private filterByName(hotelName: string){
@@ -92,7 +96,30 @@ export class HotelsComponent implements OnInit {
 
     this.minReviewRating=minRating;
     this.maxReviewRating=maxRating;
-    
+  }
+
+  private sortHotels(sortBy:string){
+    debugger;
+    switch(sortBy){
+      case "priceLtoH":
+      this.filteredHotels.sort((p1,p2)=>p1.price-p2.price);
+        break;
+      case "priceHtoL":
+      this.filteredHotels.sort((p1,p2)=>p2.price-p1.price);
+        break;
+      case "reviewLtoH":
+      this.filteredHotels.sort((p1,p2)=>p1.rating-p2.rating);
+        break;
+      case "reviewHtoL":
+      this.filteredHotels.sort((p1,p2)=>p2.rating-p1.rating);
+        break;
+      case "starLtoH":
+      this.filteredHotels.sort((p1,p2)=>p1.stars-p2.stars);
+        break;
+      case "starHtoL":
+      this.filteredHotels.sort((p1,p2)=>p2.stars-p1.stars);
+        break;
+    }
   }
 
 }
