@@ -1,3 +1,26 @@
-<p>
-  hotels works!
-</p>
+<div class="container-fluid">
+
+  <ul class="row " *ngFor="let hotel of hotels;">
+
+    <div class="col-sm-2">
+      <img [src]="hotel.photo" class="img-thumbnail image-style">
+    </div>
+    <div class="col-sm-10">
+      <div class="col-sm-12">
+        <span class="hotel-name"> {{hotel.name}}</span>
+      </div>
+      <div class="col-sm-12">
+        <ngb-rating [rate]="hotel.rating"></ngb-rating>
+      </div>
+      <div class="col-sm-12">
+          <span class="hotel-price">{{hotel.price| currency:'USD'}}</span>
+      </div>
+      <div class="col-sm-12">
+          <span class="hotel-address">{{hotel.address}}</span>
+      </div>
+
+    </div>
+
+
+  </ul>
+</div>
