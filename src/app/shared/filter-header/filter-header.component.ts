@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import { FilterHeader } from './filter-header.model';
-import { Options,ChangeContext } from 'ng5-slider';
+import { Options, ChangeContext } from 'ng5-slider';
 
 @Component({
   selector: 'app-filter-header',
@@ -11,18 +11,20 @@ import { Options,ChangeContext } from 'ng5-slider';
 export class FilterHeaderComponent implements OnInit {
 
   @Output() filterEvent: EventEmitter<FilterHeader> = new EventEmitter();
-  @Input() hotelMinValue:number;
-  @Input() hotelMaxValue:number;
+  @Input() hotelMinValue: number;
+  @Input() hotelMaxValue: number;
+  @Input() minReviewRating: number;
+  @Input() maxReviewRating: number;
 
-  private options: Options;
-  private isHotelPriceRendered: boolean = false;
-
+  private priceOptions: Options;
+  private ratingOptions: Options;
   private filterHeader: FilterHeader = new FilterHeader();
- 
-  constructor(option:Options) { }
+
+  constructor() { }
 
   ngOnInit() {
-      this.renderPriceSlider();
+    this.renderPriceSlider();
+    this.renderRatingSlider();
   }
 
   nameSearch(nameFilter: string) {
@@ -48,19 +50,35 @@ export class FilterHeaderComponent implements OnInit {
     this.filterHeader.minPrice = changeContext.value;
     this.filterHeader.maxPrice = changeContext.highValue;
     this.filterEvent.emit(this.filterHeader);
-  
+
+  }
+  userChangeRating(changeContext: ChangeContext){
+    this.filterHeader.minReviewRating = changeContext.value;
+    this.filterHeader.maxReviewRating = changeContext.highValue;
+    this.filterEvent.emit(this.filterHeader);
   }
 
-  private renderPriceSlider(){
+  private renderPriceSlider() {
     this.filterHeader.minPrice = this.hotelMinValue;
     this.filterHeader.maxPrice = this.hotelMaxValue;
 
-    this.options = {
+    this.priceOptions = {
       floor: this.hotelMinValue,
       ceil: this.hotelMaxValue,
       translate: (value: number): string => {
-            return '$' + value;
+        return '$' + value;
       }
+    };
+  }
+
+
+  private renderRatingSlider() {
+    this.filterHeader.minReviewRating = this.minReviewRating;
+    this.filterHeader.maxReviewRating = this.maxReviewRating;
+    this.ratingOptions = {
+      floor:this.minReviewRating,
+      ceil: this.maxReviewRating,
+      step: 0.1
     };
   }
 

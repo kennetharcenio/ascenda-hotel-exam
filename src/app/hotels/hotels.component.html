@@ -1,7 +1,10 @@
 <app-filter-header
  (filterEvent)="filterChange($event)" 
  [hotelMinValue]="hotelMinValue"
- [hotelMaxValue]="hotelMaxValue" *ngIf="isParentLoaded">
+ [hotelMaxValue]="hotelMaxValue" 
+ [minReviewRating]="minReviewRating" 
+ [maxReviewRating]="maxReviewRating" 
+ *ngIf="isParentLoaded">
 </app-filter-header>
 
 <div class="container-fluid list-body">

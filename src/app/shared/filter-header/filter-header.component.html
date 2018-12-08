@@ -20,8 +20,17 @@
               <ng5-slider 
               [(value)]="hotelMinValue" 
               [(highValue)]="hotelMaxValue" 
-              [options]="options"
+              [options]="priceOptions"
               (userChangeEnd)="userChangePrice($event)">
+            </ng5-slider>
+      </div>
+      <div class="filter-group col-sm-2">
+          <label>Review Rating</label>
+              <ng5-slider 
+              [(value)]="minReviewRating" 
+              [(highValue)]="maxReviewRating" 
+              [options]="ratingOptions"
+              (userChangeEnd)="userChangeRating($event)">
             </ng5-slider>
       </div>
     </div>
