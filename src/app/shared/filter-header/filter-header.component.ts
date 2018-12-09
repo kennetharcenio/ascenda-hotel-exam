@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectorRef } from '@angular/core';
 
 import { FilterHeader } from './filter-header.model';
 import { Options, ChangeContext } from 'ng5-slider';
@@ -18,18 +18,19 @@ export class FilterHeaderComponent implements OnInit {
   @Input() minReviewRating: number;
   @Input() maxReviewRating: number;
 
-  private filterHeader: FilterHeader = new FilterHeader();
-  private nameValue:string="";
-  private originalHotelMinValue: number;
-  private originalHotelMaxValue: number;
-  private originalMinReview: number;
-  private originalMaxReview: number;
-  private priceOptions: Options;
-  private ratingOptions: Options;
-  private starCount: Array<StarCount> = [];
-  private sortItems: Array<DropdownItem> = [];
 
-  constructor(private cd : ChangeDetectorRef) { }
+  filterHeader: FilterHeader = new FilterHeader();
+  originalHotelMinValue: number;
+  originalHotelMaxValue: number;
+  originalMinReview: number;
+  originalMaxReview: number;
+  nameValue: string = "";
+  priceOptions: Options;
+  ratingOptions: Options;
+  starCount: Array<StarCount> = [];
+  sortItems: Array<DropdownItem> = [];
+
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.renderPriceSlider();
@@ -55,7 +56,21 @@ export class FilterHeaderComponent implements OnInit {
     }
     this.filterEvent.emit(this.filterHeader);
   }
+  sortingSelect(sortingValue: string) {
+    this.filterHeader.sort = sortingValue;
+    this.filterEvent.emit(this.filterHeader);
+  }
 
+  resetFilters() {
+
+    this.nameValue = "";
+    this.uncheckAll();
+    this.resetPriceSlider();
+    this.resetReviewSlider();
+    this.populateSorting();
+    this.filterHeader = new FilterHeader();
+    this.filterEvent.emit(this.filterHeader);
+  }
 
   userChangePrice(changeContext: ChangeContext): void {
     this.filterHeader.minPrice = changeContext.value;
@@ -80,14 +95,14 @@ export class FilterHeaderComponent implements OnInit {
       new DropdownItem("starHtoL", "Star high to low")]
   }
 
-  private populateStarCount(){
+  private populateStarCount() {
     this.starCount =
-  [
-    new StarCount(5,false),
-    new StarCount(4,false),
-    new StarCount(3,false),
-    new StarCount(2,false),
-    new StarCount(1,false)]
+      [
+        new StarCount(5, false),
+        new StarCount(4, false),
+        new StarCount(3, false),
+        new StarCount(2, false),
+        new StarCount(1, false)]
   }
 
   private renderPriceSlider() {
@@ -142,24 +157,10 @@ export class FilterHeaderComponent implements OnInit {
     };
   }
 
-  private sortingSelect(sortingValue: string) {
-    this.filterHeader.sort = sortingValue;
-    this.filterEvent.emit(this.filterHeader);
-  }
 
-  private resetFilters() {
-   
-    this.nameValue=null;
-    this.uncheckAll();
-    this.resetPriceSlider();
-    this.resetReviewSlider();
-    this.populateSorting();
-    this.filterHeader = new FilterHeader();
-    this.filterEvent.emit(this.filterHeader);
-  }
 
   private uncheckAll() {
-    this.starCount.forEach(star => star.check =false);
+    this.starCount.forEach(star => star.check = false);
   }
 
 

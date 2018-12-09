@@ -1,19 +1,23 @@
 .filterbar {
   background-color: silver;
-  position: fixed;
   top: 0;
-  width: 100%;
-  z-index: 999;
-  
   margin-bottom: 85px;
   padding-left: 0px;
+  margin: 0;
+  padding: 0;
+  width: 20%;
+  background-color: #f1f1f1;
+  height: 100%; /* Full height */
+  position: fixed; /* Make it stick, even on scroll */
+  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+
 }
 
 .filter-group{
-    display: inline-block;
+   
     border: 1px solid #ddd;
     min-height: 97px;
-    padding-top: 14px;
+    padding: 14px;
     margin: 5px;
 }
 
@@ -21,6 +25,8 @@
   color: gold;
 }
 
-.btn-light{
-  margin-top: 5px;
+.btn-primary{
+  margin: 5px;
+  width: 97%;
+
 }

@@ -17,9 +17,9 @@ export class HotelsComponent implements OnInit {
 @Output() minReviewRating: number;
 @Output() maxReviewRating: number;
 
-  private hotels: Array<Hotel>;
-  private filteredHotels: Array<Hotel>;
-  private isParentLoaded: boolean= false;
+  hotels: Array<Hotel>;
+  filteredHotels: Array<Hotel>;
+  isParentLoaded: boolean= false;
 
   constructor(private hotelService: HotelService,
     ratingConfig: NgbRatingConfig) {
