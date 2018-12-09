@@ -47,9 +47,15 @@ export class HotelsComponent implements OnInit {
     if(filterHeader.starRating.length > 0){
      this.filterByStars(filterHeader.starRating);
     }   
+    if(filterHeader.minPrice != null){
+      this.filterByPrice(filterHeader.minPrice, filterHeader.maxPrice);
+    }
+    if(filterHeader.minReviewRating){
+      this.filterByRating(filterHeader.minReviewRating,filterHeader.maxReviewRating); 
+    }
 
-    this.filterByPrice(filterHeader.minPrice, filterHeader.maxPrice);  
-    this.filterByRating(filterHeader.minReviewRating,filterHeader.maxReviewRating); 
+     
+   
     this.sortHotels(filterHeader.sort);
   
   }
@@ -80,6 +86,7 @@ export class HotelsComponent implements OnInit {
   }
 
   private setHotelMinAndMaxValue(){
+    debugger;
     var prices :number[]=Array.from(this.hotels, x => x.price);
     var minValue = Math.min.apply(null,prices);
     var maxValue = Math.max.apply(null,prices);
