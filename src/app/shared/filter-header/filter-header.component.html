@@ -1,12 +1,12 @@
-<div class="container-fluid filterbar">
+<div class="filterbar">
 
     
-  <div class="row">
-      <div class="filter-group col-sm-2">
-          <label>Name</label>
-        <input type="text" (input)="nameSearch($event.target.value)" [value]="nameValue">
+  <div class="">
+      <div class="filter-group form-group">
+          <label>Hotel Name</label>
+        <input type="text" (input)="nameSearch($event.target.value)" [(ngModel)]="nameValue" class="form-control">
       </div>
-      <div class="filter-group col-sm-2">
+      <div class="filter-group">
       
           <label>Star rating</label>
            <div *ngFor="let starNumber of starCount">
@@ -16,7 +16,7 @@
           </label>
            </div>
       </div>
-      <div class="filter-group col-sm-2">
+      <div class="filter-group">
           <label>Price</label>
               <ng5-slider 
               [(value)]="hotelMinValue" 
@@ -25,7 +25,7 @@
               (userChangeEnd)="userChangePrice($event)">
             </ng5-slider>
       </div>
-      <div class="filter-group col-sm-2">
+      <div class="filter-group">
           <label>Review Rating</label>
               <ng5-slider 
               [(value)]="minReviewRating" 
@@ -34,7 +34,7 @@
               (userChangeEnd)="userChangeRating($event)">
             </ng5-slider>
       </div>
-      <div class="filter-group col-sm-2">
+      <div class="filter-group">
           <label>Sort</label><br/>
            <select name="sorting" (change)="sortingSelect($event.target.value)">
               <option *ngFor="let sorting of sortItems;let i=index" [value]="sorting.value">
@@ -42,8 +42,8 @@
               </option>
            </select>
       </div>
-      <div class=" col-sm-1">
-          <button type="button" class="btn btn-light" (click)="resetFilters()">Reset Filters</button>
+      <div class="">
+          <button type="button" class="btn btn-primary" (click)="resetFilters()">Reset Filters</button>
       </div>
      
     </div>
